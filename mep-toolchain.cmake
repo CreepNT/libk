@@ -1,3 +1,4 @@
+# Copyright (c) 2025, CreepNT
 # Copyright (c) 2017, David "Davee" Morgan
 # Copyright (c) 2016, Yifan Lu
 # Based off of Android toolchain file
@@ -31,7 +32,7 @@
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
 
-cmake_minimum_required( VERSION 2.6.3 )
+cmake_minimum_required( VERSION 3.20.0 )
 
 if( DEFINED CMAKE_CROSSCOMPILING )
   # subsequent toolchain loading is not really needed
@@ -68,12 +69,10 @@ endif()
 
 set( CMAKE_SYSTEM_PROCESSOR "MeP" )
 
-include(CMakeForceCompiler)
-CMAKE_FORCE_C_COMPILER("${MEPSDK}/bin/mep-elf-gcc${TOOL_OS_SUFFIX}" GNU)
-CMAKE_FORCE_CXX_COMPILER("${MEPSDK}/bin/mep-elf-g++${TOOL_OS_SUFFIX}" GNU)
+set( CMAKE_TRY_COMPILE_TARGET_TYPE STATIC_LIBRARY )
 
-#set( CMAKE_C_COMPILER   "${MEPSDK}/bin/mep-elf-gcc${TOOL_OS_SUFFIX}"     CACHE PATH "C compiler" )
-#set( CMAKE_CXX_COMPILER "${MEPSDK}/bin/mep-elf-g++${TOOL_OS_SUFFIX}"     CACHE PATH "C++ compiler" )
+set( CMAKE_C_COMPILER   "${MEPSDK}/bin/mep-elf-gcc${TOOL_OS_SUFFIX}"     CACHE PATH "C compiler" )
+set( CMAKE_CXX_COMPILER "${MEPSDK}/bin/mep-elf-g++${TOOL_OS_SUFFIX}"     CACHE PATH "C++ compiler" )
 set( CMAKE_ASM_COMPILER "${MEPSDK}/bin/mep-elf-gcc${TOOL_OS_SUFFIX}"     CACHE PATH "assembler" )
 set( CMAKE_STRIP        "${MEPSDK}/bin/mep-elf-strip${TOOL_OS_SUFFIX}"   CACHE PATH "strip" )
 set( CMAKE_AR           "${MEPSDK}/bin/mep-elf-ar${TOOL_OS_SUFFIX}"      CACHE PATH "archive" )
@@ -82,7 +81,7 @@ set( CMAKE_NM           "${MEPSDK}/bin/mep-elf-nm${TOOL_OS_SUFFIX}"      CACHE P
 set( CMAKE_OBJCOPY      "${MEPSDK}/bin/mep-elf-objcopy${TOOL_OS_SUFFIX}" CACHE PATH "objcopy" )
 set( CMAKE_OBJDUMP      "${MEPSDK}/bin/mep-elf-objdump${TOOL_OS_SUFFIX}" CACHE PATH "objdump" )
 set( CMAKE_RANLIB       "${MEPSDK}/bin/mep-elf-ranlib${TOOL_OS_SUFFIX}"  CACHE PATH "ranlib" )
-set( CMAKE_MAKE_PROGRAM "/usr/bin/make" )
+set( CMAKE_MAKE_PROGRAM "make" CACHE PATH "make" )
 
 # cache flags
 set( CMAKE_CXX_FLAGS           ""                        CACHE STRING "c++ flags" )
